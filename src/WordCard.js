@@ -1,6 +1,10 @@
 import React, {useState } from 'react';
 import  _, { attempt } from 'lodash';
 import CharacterCard from './CharacterCard';
+import Attempt from './Attempt'
+import App from './App';
+
+  const attemptLimit = 4;
 
 const prepareStateFromWord = given_word =>
     {
@@ -24,9 +28,8 @@ export default function WordCard(props){
       let guess = state.guess + c
       setState({...state, guess})
 
-      if(guess.length == state.word.length) {
-         if(guess == state.word){
-              console.log('yeah!!')
+      if(guess.length == state.word.length ) {
+         if(guess == state.word || state.attempt==attemptLimit){
               setState({...state, completed: true})
          }
          else{
@@ -39,11 +42,17 @@ export default function WordCard(props){
 
     return (
          <div>
+                <Attempt value={state.attempt}/>
+                <br></br>
               { 
                 state.chars.map((c, i) => 
                     <CharacterCard value={c} key={i} activationHandler={activationHandler} attempt={state.attempt}/>
+                    
                 )
               }  
+              
+              
+          
  </div>
  );
 }
