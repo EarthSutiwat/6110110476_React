@@ -15,6 +15,7 @@ const prepareStateFromWord = given_word =>
           chars,
           attempt: 1,
           guess:'',
+          result: '',
           completed: false
       }
     }
@@ -30,7 +31,13 @@ export default function WordCard(props){
 
       if(guess.length == state.word.length ) {
          if(guess == state.word || state.attempt==attemptLimit){
-              setState({...state, completed: true})
+            if(guess == state.word){
+              setState({...state, completed: true, result:state.result+'YOU WON!!!'})
+            }
+            else {
+              setState({...state, completed: true, result:state.result+'YOU LOSE!!!'})
+            }
+
          }
          else{
               console.log('reset, next attempt')
@@ -40,8 +47,12 @@ export default function WordCard(props){
       
     }
 
+
+
     return (
          <div>
+                
+                
                 <Attempt value={state.attempt}/>
                 <br></br>
               { 
@@ -50,6 +61,8 @@ export default function WordCard(props){
                     
                 )
               }  
+
+            <h2 className= 'result'>{state.result}</h2>
               
               
           

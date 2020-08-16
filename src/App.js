@@ -9,7 +9,7 @@ function App() {
     
     return ( 
     <div>
-            
+            <h1 style={{textAlign: "center"}}> Choose Character to make a word (You can try 4 times)</h1>
             <WordCard  value={word}  />
             
             
